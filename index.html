@@ -3,730 +3,954 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cronograma Vestibular 2027 - 28 Semanas</title>
+  <title>Cronograma Vestibular 2027</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      line-height: 1.6;
-      max-width: 1000px;
-      margin: 30px auto;
-      padding: 20px;
-      background: #f7f7f7;
-      color: #222;
+      background: #f4f6fb;
+      color: #1f2937;
+      line-height: 1.5;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 10px;
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
     }
 
-    .subtitulo {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #555;
+    .topo {
+      background: linear-gradient(135deg, #0b3d91, #1d4ed8);
+      color: white;
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .topo h1 {
+      margin: 0 0 8px 0;
+      font-size: 32px;
+    }
+
+    .topo p {
+      margin: 4px 0;
+      opacity: 0.95;
+    }
+
+    .painel {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    .card-resumo {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 12px;
+      padding: 12px 16px;
+      min-width: 180px;
+    }
+
+    .barra-externa {
+      width: 100%;
+      height: 14px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .barra-interna {
+      height: 100%;
+      width: 0%;
+      background: #ffffff;
+      transition: width 0.25s ease;
+    }
+
+    .acoes {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 18px 0 22px;
+    }
+
+    button {
+      border: none;
+      background: #0b3d91;
+      color: white;
+      padding: 11px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      opacity: 0.92;
+    }
+
+    .botao-secundario {
+      background: #475569;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
     }
 
     .semana {
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      background: white;
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e5e7eb;
     }
 
     .semana h2 {
-      margin-top: 0;
-      font-size: 22px;
+      margin: 0 0 14px 0;
       color: #0b3d91;
-      border-bottom: 2px solid #eaeaea;
+      font-size: 22px;
+      border-bottom: 2px solid #eef2ff;
       padding-bottom: 8px;
     }
 
     .aulas {
       list-style: none;
-      padding-left: 0;
+      padding: 0;
       margin: 0;
     }
 
     .aulas li {
-      margin: 8px 0;
-      padding: 6px 0;
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid #f1f5f9;
+      padding: 8px 0;
+    }
+
+    .aulas li:last-child {
+      border-bottom: none;
     }
 
     label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
       cursor: pointer;
     }
 
     input[type="checkbox"] {
-      margin-right: 10px;
-      transform: scale(1.1);
+      margin-top: 3px;
+      transform: scale(1.15);
+      cursor: pointer;
+    }
+
+    .materia {
+      font-weight: bold;
+      color: #111827;
+    }
+
+    .texto-aula {
+      color: #374151;
+    }
+
+    .concluida {
+      text-decoration: line-through;
+      color: #6b7280 !important;
+      opacity: 0.9;
+    }
+
+    .rodape {
+      text-align: center;
+      color: #64748b;
+      font-size: 13px;
+      margin-top: 26px;
+    }
+
+    @media (min-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <div class="topo">
+      <h1>Cronograma Vestibular 2027</h1>
+      <p>491 aulas · 28 semanas</p>
+      <p>Checklist com salvamento automático no navegador</p>
 
-  <h1>Cronograma Vestibular 2027</h1>
-  <p class="subtitulo">491 aulas · 28 semanas</p>
+      <div class="painel">
+        <div class="card-resumo">
+          <div><strong>Concluídas:</strong> <span id="concluidas">0</span></div>
+          <div><strong>Total:</strong> <span id="total">0</span></div>
+        </div>
 
-  <div class="semana">
-    <h2>Semana 1 — 18 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">LITERATURA — Introdução à Literatura</label></li>
-      <li><label><input type="checkbox">LITERATURA — Gêneros Literários</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Introdução à História</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Pré-História</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Mesopotâmia</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Período Pré-Colonial</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Administração Colonial</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Economia Colonial</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Nascimento da Filosofia</label></li>
-      <li><label><input type="checkbox">SOCIOLOGIA — O Surgimento da Sociologia</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Estética na Arte</label></li>
-      <li><label><input type="checkbox">INGLÊS — Introdução</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Linguagem, Língua, Fala e Norma</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Linguagem, língua, fala e norma</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Introdução à Cartografia</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Orientação e Localização Geográfica</label></li>
-      <li><label><input type="checkbox">LITERATURA — Teoria Literária</label></li>
-      <li><label><input type="checkbox">LITERATURA — Trovadorismo</label></li>
-    </ul>
+        <div class="card-resumo" style="flex:1; min-width: 240px;">
+          <div><strong>Progresso:</strong> <span id="porcentagem">0%</span></div>
+          <div class="barra-externa">
+            <div class="barra-interna" id="barraProgresso"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acoes">
+      <button onclick="expandirTodas()">Expandir tudo</button>
+      <button class="botao-secundario" onclick="fecharTodas()">Fechar tudo</button>
+      <button class="botao-secundario" onclick="limparProgresso()">Limpar progresso</button>
+    </div>
+
+    <div class="grid">
+
+      <details class="semana" open>
+        <summary><h2 style="display:inline;">Semana 1 — 18 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem1-aula1"><span class="texto-aula"><span class="materia">LITERATURA</span> — Introdução à Literatura</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula2"><span class="texto-aula"><span class="materia">LITERATURA</span> — Gêneros Literários</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula3"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Introdução à História</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula4"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Pré-História</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula5"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Mesopotâmia</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula6"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Período Pré-Colonial</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula7"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Administração Colonial</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula8"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Economia Colonial</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula9"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Nascimento da Filosofia</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula10"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — O Surgimento da Sociologia</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula11"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Estética na Arte</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula12"><span class="texto-aula"><span class="materia">INGLÊS</span> — Introdução</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula13"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Linguagem, Língua, Fala e Norma</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula14"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Linguagem, língua, fala e norma</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula15"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Introdução à Cartografia</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula16"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Orientação e Localização Geográfica</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula17"><span class="texto-aula"><span class="materia">LITERATURA</span> — Teoria Literária</span></label></li>
+          <li><label><input type="checkbox" data-id="sem1-aula18"><span class="texto-aula"><span class="materia">LITERATURA</span> — Trovadorismo</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 2 — 18 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem2-aula1"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Egito Antigo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula2"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Fenícios</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula3"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Hebreus</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula4"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — União Ibérica e Invasões</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula5"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Domínio Holandês e Restauração Portuguesa</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula6"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Bandeirismo e Interiorização</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula7"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Sócrates, Sofistas e Platão</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula8"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Sociologia ou Ciências Sociais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula9"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Arte pra quê? Funções da arte</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula10"><span class="texto-aula"><span class="materia">INGLÊS</span> — Leitura estratégica</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula11"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Variação Linguística</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula12"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Estrutura e Formação de Palavras</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula13"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Projeções Cartográficas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula14"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Cartografia Temática</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula15"><span class="texto-aula"><span class="materia">LITERATURA</span> — Humanismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula16"><span class="texto-aula"><span class="materia">LITERATURA</span> — Gil Vicente</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula17"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Persas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem2-aula18"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Período Pré-Homérico e Homérico</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 3 — 18 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem3-aula1"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Período Clássico</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula2"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Mineração</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula3"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Movimentos Nativistas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula4"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Pombal e o Nascimento Agrícola</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula5"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Aristóteles - Metafísica e Lógica</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula6"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Modernidade e Pós-Modernidade</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula7"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Arte no Mundo Antigo: Egito, Grécia e Roma</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula8"><span class="texto-aula"><span class="materia">INGLÊS</span> — Conectores Textuais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula9"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — O que é Sujeito</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula10"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Predicativos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula11"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Escala</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula12"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Fuso Horário</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula13"><span class="texto-aula"><span class="materia">LITERATURA</span> — Classicismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula14"><span class="texto-aula"><span class="materia">LITERATURA</span> — Classicismo - Camões</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula15"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Esparta</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula16"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Atenas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula17"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Roma Antiga</span></label></li>
+          <li><label><input type="checkbox" data-id="sem3-aula18"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Movimentos Emancipacionistas</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 4 — 18 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem4-aula1"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Chegada da Família Real ao Brasil</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula2"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Independência do Brasil</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula3"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Filosofia Política na Antiguidade</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula4"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Trabalho em Marx, Durkhein e Weber</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula5"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Arte no Mundo Bizantino</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula6"><span class="texto-aula"><span class="materia">INGLÊS</span> — Formação das Palavras, Sinônimos e Antônimos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula7"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Derivação e Composição</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula8"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Neologismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula9"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Sensoriamento Remoto</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula10"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Introdução à Geologia</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula11"><span class="texto-aula"><span class="materia">LITERATURA</span> — Classicismo - Camões Lírico</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula12"><span class="texto-aula"><span class="materia">LITERATURA</span> — Barroco</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula13"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Roma Monarquia</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula14"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Roma República</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula15"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — A Expansão Republicana</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula16"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Formação do Estado Nacional Brasileiro</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula17"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — A Crise do Primeiro Reinado</span></label></li>
+          <li><label><input type="checkbox" data-id="sem4-aula18"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Estética em Platão, Aristóteles e Kant</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 5 — 18 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem5-aula1"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Karl Marx</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula2"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Arte Medieval</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula3"><span class="texto-aula"><span class="materia">INGLÊS</span> — Verbo to be</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula4"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Neologismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula5"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Outros Processos de Formação de Palavras</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula6"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Escala Geológica</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula7"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Camadas e Deriva Continental</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula8"><span class="texto-aula"><span class="materia">LITERATURA</span> — Barroco - Padre Antônio Vieira</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula9"><span class="texto-aula"><span class="materia">LITERATURA</span> — Gregório de Matos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula10"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Crise da República</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula11"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Alto Império</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula12"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Baixo Império</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula13"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Período Regencial</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula14"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Revoltas Regenciais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula15"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Patrística e Escolástica</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula16"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Durkhein</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula17"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Arte do Renascimento I</span></label></li>
+          <li><label><input type="checkbox" data-id="sem5-aula18"><span class="texto-aula"><span class="materia">INGLÊS</span> — Preposições, artigos e conjunções</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 6 — 18 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem6-aula1"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Estrutura de formação de palavras</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula2"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Os Nomes</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula3"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Placas Tectônicas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula4"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — O ciclo das rochas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula5"><span class="texto-aula"><span class="materia">LITERATURA</span> — Arcadismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula6"><span class="texto-aula"><span class="materia">LITERATURA</span> — Arcadismo em Portugal</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula7"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Império Bizantino</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula8"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Reinos Bárbaros</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula9"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Impérios Francos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula10"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Segundo Reinado - Política Interna</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula11"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Expansão Cafeeira e Crise do Escravismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula12"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Maquiavel</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula13"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Max Weber</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula14"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Arte do Renascimento II</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula15"><span class="texto-aula"><span class="materia">INGLÊS</span> — Simple Present</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula16"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Nomes</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula17"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Os Pronomes e os Artigos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem6-aula18"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Vulcanismo I</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 7 — 18 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem7-aula1"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Vulcanismo II</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula2"><span class="texto-aula"><span class="materia">LITERATURA</span> — Arcadismo no Brasil</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula3"><span class="texto-aula"><span class="materia">LITERATURA</span> — Arcadismo Nativistas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula4"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Fundação do Islã</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula5"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Formação do Feudalismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula6"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Sociedade e Política Feudal</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula7"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Política Externa - A Questão Christie</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula8"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Política Externa - Intervenção do Prata</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula9"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Thomas Hobbes e Rousseau</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula10"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Augusto Comte</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula11"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Barroco</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula12"><span class="texto-aula"><span class="materia">INGLÊS</span> — Present Continuous</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula13"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Pronomes e Artigos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula14"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Colocação dos Pronomes Átonos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula15"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Falhamentos Geológicos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula16"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Estrutura do Relevo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula17"><span class="texto-aula"><span class="materia">LITERATURA</span> — Romantismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem7-aula18"><span class="texto-aula"><span class="materia">LITERATURA</span> — Romantismo em Portugal</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 8 — 18 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem8-aula1"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Igreja Medieval</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula2"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Baixa Idade Média e Cruzadas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula3"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Renascimento Cultural e Comercial</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula4"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Guerra do Paraguai</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula5"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Primeira República Brasileira</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula6"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Montesquieu e Locke</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula7"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Interpretações no Brasil</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula8"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Do Barroco ao Rococó</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula9"><span class="texto-aula"><span class="materia">INGLÊS</span> — Present Perfect</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula10"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Os Verbos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula11"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Usos Expressivos dos Verbos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula12"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Processo de Formação do Relevo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula13"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Relevo Brasileiro I</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula14"><span class="texto-aula"><span class="materia">LITERATURA</span> — Romantismo no Brasil - 1ª Geração</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula15"><span class="texto-aula"><span class="materia">LITERATURA</span> — Romantismo - Ultrarromantismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula16"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Povos originários nativos das Américas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula17"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Os Maias</span></label></li>
+          <li><label><input type="checkbox" data-id="sem8-aula18"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Os Astecas</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 9 — 18 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem9-aula1"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Governo Constitucional de Deodoro</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula2"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Governo de Prudente de Morais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula3"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Racionalismo, Empirismo e Descartes</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula4"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Pensamento Social Brasileiro</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula5"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Neoclassicismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula6"><span class="texto-aula"><span class="materia">INGLÊS</span> — Present Perfect Continuous</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula7"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — O Sujeito</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula8"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Predicação Verbal e Predicado</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula9"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Relevo Brasileiro II</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula10"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Relevo Brasileiro III</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula11"><span class="texto-aula"><span class="materia">LITERATURA</span> — Romantismo - Terceira Geração</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula12"><span class="texto-aula"><span class="materia">LITERATURA</span> — Romantismo - Narrativa</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula13"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Os Incas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula14"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Crises dos Séculos XIV e XV</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula15"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Formação das Monarquias Nacionais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula16"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Governo Campos Sales</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula17"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Governo Rodrigues Alves</span></label></li>
+          <li><label><input type="checkbox" data-id="sem9-aula18"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Bacon, Hume e Locke</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 10 — 18 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem10-aula1"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Cidadania e os Direitos no Brasil</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula2"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Missão Artística Francesa</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula3"><span class="texto-aula"><span class="materia">INGLÊS</span> — Past Simple</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula4"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Regência Verbal e Nominal</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula5"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Complementos Verbais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula6"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Relevo do Litoral Brasileiro</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula7"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Relevo da Ásia</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula8"><span class="texto-aula"><span class="materia">LITERATURA</span> — Romantismo - José de Alencar</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula9"><span class="texto-aula"><span class="materia">LITERATURA</span> — José de Alencar - Principais Obras</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula10"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Renascimento Artístico I</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula11"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Renascimento Artístico II</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula12"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Renascimento: Fases, Difusão e Crise</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula13"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Governo Afonso Pena</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula14"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Governo Hermes da Fonseca</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula15"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Kant</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula16"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Desigualdades no Brasil</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula17"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Romantismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem10-aula18"><span class="texto-aula"><span class="materia">INGLÊS</span> — Past Continuous</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 11 — 18 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem11-aula1"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Complementos Verbais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula2"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Adjunto Adnominal, Compl. Nominal e Aposto</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula3"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Produção Mineral no Brasil</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula4"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Formação dos Solos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula5"><span class="texto-aula"><span class="materia">LITERATURA</span> — Memórias de um Sargento de Milícias</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula6"><span class="texto-aula"><span class="materia">LITERATURA</span> — Teatro</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula7"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Introdução à Geografia</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula8"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Nação e Território</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula9"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Organização do Estado Brasileiro</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula10"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Fronteira, Limites e Divisas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula11"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Reforma Luterana</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula12"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Reforma Calvinista</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula13"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Contrareforma</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula14"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Governo Venceslau Brás</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula15"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — O Nacionalista Econômico - Estado Novo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula16"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Hegel</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula17"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Violência e Contemporaneidade</span></label></li>
+          <li><label><input type="checkbox" data-id="sem11-aula18"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Arte Brasileira do século XIX</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 12 — 18 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem12-aula1"><span class="texto-aula"><span class="materia">INGLÊS</span> — Past Perfect</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula2"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Adjunto Adnominal</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula3"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Aposto e Vocativo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula4"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Processos erosivos intensos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula5"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Voçoroca</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula6"><span class="texto-aula"><span class="materia">LITERATURA</span> — Realismo - Introdução</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula7"><span class="texto-aula"><span class="materia">LITERATURA</span> — Realismo - Portugal</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula8"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Formação do Território Brasileiro</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula9"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Teorias Demográficas e Análise Populacional</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula10"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Conceitos Demográficos I</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula11"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Absolutismo - Contextos Gerais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula12"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Absolutismo Inglês</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula13"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Absolutismo Francês</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula14"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Era Vargas e o Brasil na Segunda Guerra</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula15"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Gaspar Dutra</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula16"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Nietzsche</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula17"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Movimentos Sociais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem12-aula18"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Realismo Brasileiro</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 13 — 18 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem13-aula1"><span class="texto-aula"><span class="materia">INGLÊS</span> — Past Perfect Continuous</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula2"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Aposto e Vocativo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula3"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Crase</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula4"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — O sistema Terra-Sol</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula5"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Os componentes do clima</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula6"><span class="texto-aula"><span class="materia">LITERATURA</span> — Realismo - Brasil</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula7"><span class="texto-aula"><span class="materia">LITERATURA</span> — Machado de Assis</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula8"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Conceitos Demográficos II</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula9"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — População Brasileira</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula10"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Transição Demográfica Brasileira</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula11"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Expansão Marítima - Contexto e Fatores</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula12"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Expansão Marítima - Espanha</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula13"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Expansão Marítima - Portugal</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula14"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — O Segundo Governo Vargas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula15"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Café Filho e JK</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula16"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — A História da Ciência</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula17"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Infância, Adolescência e Juventude</span></label></li>
+          <li><label><input type="checkbox" data-id="sem13-aula18"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Impressionismo</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 14 — 18 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem14-aula1"><span class="texto-aula"><span class="materia">INGLÊS</span> — Simple Future</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula2"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Vozes Verbais e Agentes da Passiva</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula3"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Vozes Verbais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula4"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — O Balanço Térmico</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula5"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Tipos de Chuvas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula6"><span class="texto-aula"><span class="materia">LITERATURA</span> — Romances</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula7"><span class="texto-aula"><span class="materia">LITERATURA</span> — Contos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula8"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Migração Interna Brasileira</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula9"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Análise da Pirâmide Etária</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula10"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — População Mundial - Migração Externa</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula11"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Agricultura Brasileira</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula12"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Expansão Marítima - Consequências</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula13"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Mercantilismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula14"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Antigo Sistema Colonial</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula15"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — O Governo J.K - Especial</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula16"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — O Legado de JK</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula17"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Escola de Frankfurt</span></label></li>
+          <li><label><input type="checkbox" data-id="sem14-aula18"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Migrações no Mundo Moderno</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 15 — 18 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem15-aula1"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Realismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula2"><span class="texto-aula"><span class="materia">INGLÊS</span> — To be going to</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula3"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Adjunto Adverbial</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula4"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Adjunto Adverbial</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula5"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — O papel da climatologia na dinâmica terrestre</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula6"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Os oceanos e o clima</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula7"><span class="texto-aula"><span class="materia">LITERATURA</span> — Naturalismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula8"><span class="texto-aula"><span class="materia">LITERATURA</span> — Parnasianismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula9"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Agronegócio e Produção Agrícola Brasileira</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula10"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Trabalho no Campo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula11"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Reforma Agrária no Brasil</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula12"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — A Questão Agrária no Brasil</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula13"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Redemocratização</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula14"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Colonização Espanhola</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula15"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Expansão e Colonização Inglesa</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula16"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Expansão e Colonização Francesa</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula17"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Foucault</span></label></li>
+          <li><label><input type="checkbox" data-id="sem15-aula18"><span class="texto-aula"><span class="materia">SOCIOLOGIA</span> — Ambiente como Questão Global</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 16 — 17 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem16-aula1"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Cubismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula2"><span class="texto-aula"><span class="materia">INGLÊS</span> — Future Continuous</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula3"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Colocação dos Termos na Oração</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula4"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Colocação dos termos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula5"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Massas de ar I</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula6"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Massas de ar II</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula7"><span class="texto-aula"><span class="materia">LITERATURA</span> — Olavo Bilac</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula8"><span class="texto-aula"><span class="materia">LITERATURA</span> — Simbolismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula9"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — O Desenvolvimento da Agricultura</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula10"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Agricultura nos Países Subdesenvolvidos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula11"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — As Paisagens Naturais e Sistemas Agrícolas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula12"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Agricultura nos Estados Unidos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula13"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Expansão e Colonização Holandesa</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula14"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Revoluções Puritana e Gloriosa</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula15"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — A Construção de Brasília</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula16"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Jânio Quadros</span></label></li>
+          <li><label><input type="checkbox" data-id="sem16-aula17"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Simone Beauvoir e Sartre</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 17 — 17 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem17-aula1"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Hiperrealismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula2"><span class="texto-aula"><span class="materia">INGLÊS</span> — Future Perfect</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula3"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Concordância Nominal</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula4"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Concordância nominal</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula5"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Tipos de Clima</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula6"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Circulação da Atmosfera</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula7"><span class="texto-aula"><span class="materia">LITERATURA</span> — Simbolismo no Brasil</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula8"><span class="texto-aula"><span class="materia">LITERATURA</span> — Pré-Modernismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula9"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Introdução à Urbanização</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula10"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Rede, Hierarquia e Função</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula11"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Regiões Metropolitanas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula12"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Processo de Urbanização Brasileira</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula13"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Iluminismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula14"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Independência dos Estados Unidos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula15"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — João Goulart</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula16"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Humberto Castelo Branco</span></label></li>
+          <li><label><input type="checkbox" data-id="sem17-aula17"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Habermas e Hanna Arendt</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 18 — 17 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem18-aula1"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Surrealismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula2"><span class="texto-aula"><span class="materia">INGLÊS</span> — Future Perfect Continuous</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula3"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Concordância Verbal</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula4"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Concordância Verbal</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula5"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Furacões e Tornados</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula6"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — El Niño</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula7"><span class="texto-aula"><span class="materia">LITERATURA</span> — Lima Barreto</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula8"><span class="texto-aula"><span class="materia">LITERATURA</span> — Euclides da Cunha</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula9"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Gentrificação e Especulação Imobiliária</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula10"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Urbanização e Cultura de Massas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula11"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Taylorismo, Fordismo e Toyotismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula12"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Tipos de Indústria</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula13"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Revolução Francesa</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula14"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Revolução Francesa - Fase Popular</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula15"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Artur Costa e Silva</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula16"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Emílio Garrastazu Médici</span></label></li>
+          <li><label><input type="checkbox" data-id="sem18-aula17"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Bioética e Hans Jonas</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 19 — 17 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem19-aula1"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Expressionismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula2"><span class="texto-aula"><span class="materia">INGLÊS</span> — Conditionals</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula3"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Oração Subordinada Substantiva</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula4"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Orações Sub. Substantivas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula5"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Geossistema Climático da Amazônia</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula6"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Clima na Amazônia</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula7"><span class="texto-aula"><span class="materia">LITERATURA</span> — Augusto dos Anjos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula8"><span class="texto-aula"><span class="materia">LITERATURA</span> — Vanguardas Europeias</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula9"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Indústria Brasileira</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula10"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — A Indústria no Mundo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula11"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Indústria nos EUA, Europa e Japão</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula12"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Indústria na América Latina</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula13"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Revolução Industrial</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula14"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Consequências da Revolução Industrial</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula15"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Ernesto Geisel</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula16"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Figueiredo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem19-aula17"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Política e Poder</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 20 — 17 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem20-aula1"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Futurismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem20-aula2"><span class="texto-aula"><span class="materia">INGLÊS</span> — Modal Verbs</span></label></li>
+          <li><label><input type="checkbox" data-id="sem20-aula3"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Orações Subordinadas Adverbiais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem20-aula4"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Orações Sub. Adverbiais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem20-aula5"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Clima da Ásia</span></label></li>
+          <li><label><input type="checkbox" data-id="sem20-aula6"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Clima da Europa</span></label></li>
+	  <li><label><input type="checkbox" data-id="sem20-aula7"><span class="texto-aula"><span class="materia">LITERATURA</span> — Modernismo em Portugal</span></label></li>
+          <li><label><input type="checkbox" data-id="sem20-aula8"><span class="texto-aula"><span class="materia">LITERATURA</span> — Fernando Pessoa</span></label></li>
+          <li><label><input type="checkbox" data-id="sem20-aula9"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Fases do Capitalismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem20-aula10"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Expansão do Capitalismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem20-aula11"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Globalização</span></label></li>
+          <li><label><input type="checkbox" data-id="sem20-aula12"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Era Napoleônica</span></label></li>
+          <li><label><input type="checkbox" data-id="sem20-aula13"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Expansão Territorial dos EUA</span></label></li>
+          <li><label><input type="checkbox" data-id="sem20-aula14"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Redemocratização e Sarney</span></label></li>
+          <li><label><input type="checkbox" data-id="sem20-aula15"><span class="texto-aula"><span class="materia">HIST. BRASIL</span> — Governo Collor</span></label></li>
+          <li><label><input type="checkbox" data-id="sem20-aula16"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Racismo Estrutural</span></label></li>
+          <li><label><input type="checkbox" data-id="sem20-aula17"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Dadaísmo</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 21 — 17 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem21-aula1"><span class="texto-aula"><span class="materia">INGLÊS</span> — Modal Verbs II</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula2"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Orações Subordinadas Adjetivas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula3"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Orações Sub. Adjetivas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula4"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Poluição Atmosférica e Inversão Térmica</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula5"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Problemas ambientais urbanos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula6"><span class="texto-aula"><span class="materia">LITERATURA</span> — Semana de Arte Moderna</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula7"><span class="texto-aula"><span class="materia">LITERATURA</span> — Oswald de Andrade</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula8"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Economia na Globalização</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula9"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Nova Divisão Internacional do Trabalho</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula10"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Blocos Econômicos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula11"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Guerra de Secessão</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula12"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Revoluções de 1830 e 1848</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula13"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Modernidade Líquida</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula14"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Arte Cinética Conceitual</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula15"><span class="texto-aula"><span class="materia">INGLÊS</span> — Phrasal Verbs e Expressões Idiomáticas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula16"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Orações Coordenadas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem21-aula17"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Orações coordenadas</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 22 — 17 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem22-aula1"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Eventos Climáticos Extremos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula2"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — A Questão Climática</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula3"><span class="texto-aula"><span class="materia">LITERATURA</span> — Mario de Andrade</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula4"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Mercosul</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula5"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Recursos Energéticos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula6"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Combustíveis Fósseis</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula7"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Unificação da Itália</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula8"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Unificação da Alemanha</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula9"><span class="texto-aula"><span class="materia">FILOSOFIA</span> — Ética e Liberdade</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula10"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Minimalismo Body Art</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula11"><span class="texto-aula"><span class="materia">INGLÊS</span> — False Friends e Collocations</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula12"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Pontuação</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula13"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Pontuação</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula14"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Aquecimento Global</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula15"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Mudanças Climáticas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula16"><span class="texto-aula"><span class="materia">LITERATURA</span> — Manoel Bandeira</span></label></li>
+          <li><label><input type="checkbox" data-id="sem22-aula17"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Transportes no Brasil</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 23 — 17 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem23-aula1"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Indicadores Socioeconômicos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula2"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — IDH Municipal</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula3"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Neocolonialismo - Origem</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula4"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Neocolonialismo - Efeitos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula5"><span class="texto-aula"><span class="materia">HIST. ARTE</span> — Expressionismo Abstrato</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula6"><span class="texto-aula"><span class="materia">INGLÊS</span> — English Questions</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula7"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Semântica</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula8"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Semântica</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula9"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Águas do Planeta</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula10"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Conceitos Hidrográficos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula11"><span class="texto-aula"><span class="materia">LITERATURA</span> — Geração de 30</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula12"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Instituições Internacionais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula13"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Guerra Fria</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula14"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Rivalidade Global da Guerra Fria</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula15"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — O fim da Guerra Fria e as Novas Fronteiras</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula16"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Rumo à Ordem Pluripolar</span></label></li>
+          <li><label><input type="checkbox" data-id="sem23-aula17"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Imperialismo Americano</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 24 — 17 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem24-aula1"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Primeira Guerra Mundial I</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula2"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Figuras de Palavra e Figuras de Som</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula3"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Figuras de Construção</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula4"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Morfologia e Padrões de Drenagem</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula5"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Bacia Hidrográfica</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula6"><span class="texto-aula"><span class="materia">LITERATURA</span> — Romance de 30</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula7"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Nova Ordem Mundial</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula8"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Geopolítica dos EUA</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula9"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Política Externa dos EUA</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula10"><span class="texto-aula"><span class="materia">GEO. HUMANA</span> — Geopolítica Mundial do Petróleo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula11"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Primeira Guerra Mundial II</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula12"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Revolução Russa - Origens</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula13"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Figuras de Pensamento</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula14"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Figuras de Linguagem 1</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula15"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Hidrografia Brasileira e Correntes Marítimas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula16"><span class="texto-aula"><span class="materia">LITERATURA</span> — Graciliano Ramos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem24-aula17"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — China</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 25 — 17 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem25-aula1"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Ásia Meridional</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula2"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Índia</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula3"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Rússia I</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula4"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Rússia II</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula5"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Tigres Asiáticos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula6"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Revolução Russa - Fase Socialista</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula7"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Revolução Russa - Fase Stalinista</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula8"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Figuras de Linguagem 2</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula9"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Figuras de Linguagem 3</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula10"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Sistemas Aquíferos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula11"><span class="texto-aula"><span class="materia">LITERATURA</span> — Carlos Drummond de Andrade</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula12"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Japão I</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula13"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Japão II</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula14"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — América do Norte - Física</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula15"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — América do Norte - Econômica</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula16"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — América Central</span></label></li>
+          <li><label><input type="checkbox" data-id="sem25-aula17"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Europa - Formação da UE</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 26 — 17 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem26-aula1"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Europa - Aspectos Naturais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula2"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Europa - Aspectos Econômicos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula3"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Nazismo e Fascismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula4"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Franquismo</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula5"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Texto, Contexto e Intertexto</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula6"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Texto, Contexto e Intertexto</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula7"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Tipos de Biomas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula8"><span class="texto-aula"><span class="materia">LITERATURA</span> — Carlos Drummond de Andrade</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula9"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — África Humana</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula10"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — África - Geografia Física</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula11"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Oriente Médio e Jerusalém</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula12"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Israel x Palestina</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula13"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Revolução Iraniana</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula14"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Segunda Guerra Mundial I</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula15"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Segunda Guerra Mundial II</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula16"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Tipos Textuais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem26-aula17"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Tipos Textuais</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 27 — 17 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem27-aula1"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Amazônia</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula2"><span class="texto-aula"><span class="materia">LITERATURA</span> — Geração de 45</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula3"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Oceania - Aspectos Gerais e Físicos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula4"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Oceania - Aspectos Humanos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula5"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Nordeste - Aspectos Naturais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula6"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Nordeste - Aspectos Humanos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula7"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Nordeste - Aspectos Econômicos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula8"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Descolonização da Ásia</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula9"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — As Nações Unidas</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula10"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Gêneros Textuais - Sist. Informativo e Jornalístico</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula11"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Gêneros Textuais - Sist. Publicitário</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula12"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Biomas Brasileiros</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula13"><span class="texto-aula"><span class="materia">LITERATURA</span> — João Cabral de Melo Neto</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula14"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Norte - Aspectos Naturais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula15"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Norte - Aspectos Humanos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula16"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Norte - Aspectos Econômicos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem27-aula17"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Sudeste - Aspectos Naturais</span></label></li>
+        </ul>
+      </details>
+
+      <details class="semana">
+        <summary><h2 style="display:inline;">Semana 28 — 17 aulas</h2></summary>
+        <ul class="aulas">
+          <li><label><input type="checkbox" data-id="sem28-aula1"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Sudeste - Aspectos Humanos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula2"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Sudeste - Aspectos Econômicos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula3"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Revolução Chinesa</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula4"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Mao-Tsetung</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula5"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Articulação para Criação do Humor e Ironia</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula6"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Pantanal</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula7"><span class="texto-aula"><span class="materia">LITERATURA</span> — João Cabral de Melo Neto (Obras / Análise)</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula8"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Centro-Oeste - Aspectos Naturais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula9"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Centro-Oeste - Aspectos Humanos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula10"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Centro-Oeste - Aspectos Econômicos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula11"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Sul - Aspectos Naturais</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula12"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Sul - Aspectos Humanos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula13"><span class="texto-aula"><span class="materia">GEO. REGIONAL</span> — Sul - Aspectos Econômicos</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula14"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Revolução Cubana</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula15"><span class="texto-aula"><span class="materia">HIST. GERAL</span> — Guerra Fria</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula16"><span class="texto-aula"><span class="materia">GRAMÁTICA</span> — Exercícios - Criação de Humor</span></label></li>
+          <li><label><input type="checkbox" data-id="sem28-aula17"><span class="texto-aula"><span class="materia">GEO. FÍSICA</span> — Domínios Morfoclimáticos</span></label></li>
+        </ul>
+      </details>
+    </div>
+
+    <div class="rodape">
+      Feito para acompanhamento das aulas no navegador com salvamento automático.
+    </div>
   </div>
 
-  <div class="semana">
-    <h2>Semana 2 — 18 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">HIST. GERAL — Egito Antigo</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Fenícios</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Hebreus</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — União Ibérica e Invasões</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Domínio Holandês e Restauração Portuguesa</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Bandeirismo e Interiorização</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Sócrates, Sofistas e Platão</label></li>
-      <li><label><input type="checkbox">SOCIOLOGIA — Sociologia ou Ciências Sociais</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Arte pra quê? Funções da arte</label></li>
-      <li><label><input type="checkbox">INGLÊS — Leitura estratégica</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Variação Linguística</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Estrutura e Formação de Palavras</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Projeções Cartográficas</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Cartografia Temática</label></li>
-      <li><label><input type="checkbox">LITERATURA — Humanismo</label></li>
-      <li><label><input type="checkbox">LITERATURA — Gil Vicente</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Persas</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Período Pré-Homérico e Homérico</label></li>
-    </ul>
-  </div>
+  <script>
+    const STORAGE_KEY = "cronograma_vestibular_2027";
 
-  <div class="semana">
-    <h2>Semana 3 — 18 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">HIST. GERAL — Período Clássico</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Mineração</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Movimentos Nativistas</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Pombal e o Nascimento Agrícola</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Aristóteles - Metafísica e Lógica</label></li>
-      <li><label><input type="checkbox">SOCIOLOGIA — Modernidade e Pós-Modernidade</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Arte no Mundo Antigo: Egito, Grécia e Roma</label></li>
-      <li><label><input type="checkbox">INGLÊS — Conectores Textuais</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — O que é Sujeito</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Predicativos</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Escala</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Fuso Horário</label></li>
-      <li><label><input type="checkbox">LITERATURA — Classicismo</label></li>
-      <li><label><input type="checkbox">LITERATURA — Classicismo - Camões</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Esparta</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Atenas</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Roma Antiga</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Movimentos Emancipacionistas</label></li>
-    </ul>
-  </div>
+    function atualizarResumo() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+      const marcados = document.querySelectorAll('input[type="checkbox"][data-id]:checked').length;
+      const total = checkboxes.length;
+      const porcentagem = total ? Math.round((marcados / total) * 100) : 0;
 
-  <div class="semana">
-    <h2>Semana 4 — 18 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">HIST. BRASIL — Chegada da Família Real ao Brasil</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Independência do Brasil</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Filosofia Política na Antiguidade</label></li>
-      <li><label><input type="checkbox">SOCIOLOGIA — Trabalho em Marx, Durkhein e Weber</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Arte no Mundo Bizantino</label></li>
-      <li><label><input type="checkbox">INGLÊS — Formação das Palavras, Sinônimos e Antônimos</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Derivação e Composição</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Neologismo</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Sensoriamento Remoto</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Introdução à Geologia</label></li>
-      <li><label><input type="checkbox">LITERATURA — Classicismo - Camões Lírico</label></li>
-      <li><label><input type="checkbox">LITERATURA — Barroco</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Roma Monarquia</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Roma República</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — A Expansão Republicana</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Formação do Estado Nacional Brasileiro</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — A Crise do Primeiro Reinado</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Estética em Platão, Aristóteles e Kant</label></li>
-    </ul>
-  </div>
+      document.getElementById("concluidas").textContent = marcados;
+      document.getElementById("total").textContent = total;
+      document.getElementById("porcentagem").textContent = porcentagem + "%";
+      document.getElementById("barraProgresso").style.width = porcentagem + "%";
+    }
 
-  <div class="semana">
-    <h2>Semana 5 — 18 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">SOCIOLOGIA — Karl Marx</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Arte Medieval</label></li>
-      <li><label><input type="checkbox">INGLÊS — Verbo to be</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Neologismo</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Outros Processos de Formação de Palavras</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Escala Geológica</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Camadas e Deriva Continental</label></li>
-      <li><label><input type="checkbox">LITERATURA — Barroco - Padre Antônio Vieira</label></li>
-      <li><label><input type="checkbox">LITERATURA — Gregório de Matos</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Crise da República</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Alto Império</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Baixo Império</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Período Regencial</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Revoltas Regenciais</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Patrística e Escolástica</label></li>
-      <li><label><input type="checkbox">SOCIOLOGIA — Durkhein</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Arte do Renascimento I</label></li>
-      <li><label><input type="checkbox">INGLÊS — Preposições, artigos e conjunções</label></li>
-    </ul>
-  </div>
+    function aplicarEstiloConclusao(checkbox) {
+      const texto = checkbox.parentElement.querySelector(".texto-aula");
+      if (!texto) return;
 
-  <div class="semana">
-    <h2>Semana 6 — 18 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Estrutura de formação de palavras</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Os Nomes</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Placas Tectônicas</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — O ciclo das rochas</label></li>
-      <li><label><input type="checkbox">LITERATURA — Arcadismo</label></li>
-      <li><label><input type="checkbox">LITERATURA — Arcadismo em Portugal</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Império Bizantino</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Reinos Bárbaros</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Impérios Francos</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Segundo Reinado - Política Interna</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Expansão Cafeeira e Crise do Escravismo</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Maquiavel</label></li>
-      <li><label><input type="checkbox">SOCIOLOGIA — Max Weber</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Arte do Renascimento II</label></li>
-      <li><label><input type="checkbox">INGLÊS — Simple Present</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Nomes</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Os Pronomes e os Artigos</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Vulcanismo I</label></li>
-    </ul>
-  </div>
+      if (checkbox.checked) {
+        texto.classList.add("concluida");
+      } else {
+        texto.classList.remove("concluida");
+      }
+    }
 
-  <div class="semana">
-    <h2>Semana 7 — 18 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">GEO. FÍSICA — Vulcanismo II</label></li>
-      <li><label><input type="checkbox">LITERATURA — Arcadismo no Brasil</label></li>
-      <li><label><input type="checkbox">LITERATURA — Arcadismo Nativistas</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Fundação do Islã</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Formação do Feudalismo</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Sociedade e Política Feudal</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Política Externa - A Questão Christie</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Política Externa - Intervenção do Prata</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Thomas Hobbes e Rousseau</label></li>
-      <li><label><input type="checkbox">SOCIOLOGIA — Augusto Comte</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Barroco</label></li>
-      <li><label><input type="checkbox">INGLÊS — Present Continuous</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Pronomes e Artigos</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Colocação dos Pronomes Átonos</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Falhamentos Geológicos</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Estrutura do Relevo</label></li>
-      <li><label><input type="checkbox">LITERATURA — Romantismo</label></li>
-      <li><label><input type="checkbox">LITERATURA — Romantismo em Portugal</label></li>
-    </ul>
-  </div>
+    function carregarProgresso() {
+      const salvo = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
 
-  <div class="semana">
-    <h2>Semana 8 — 18 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">HIST. GERAL — Igreja Medieval</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Baixa Idade Média e Cruzadas</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Renascimento Cultural e Comercial</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Guerra do Paraguai</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Primeira República Brasileira</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Montesquieu e Locke</label></li>
-      <li><label><input type="checkbox">SOCIOLOGIA — Interpretações no Brasil</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Do Barroco ao Rococó</label></li>
-      <li><label><input type="checkbox">INGLÊS — Present Perfect</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Os Verbos</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Usos Expressivos dos Verbos</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Processo de Formação do Relevo</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Relevo Brasileiro I</label></li>
-      <li><label><input type="checkbox">LITERATURA — Romantismo no Brasil - 1ª Geração</label></li>
-      <li><label><input type="checkbox">LITERATURA — Romantismo - Ultrarromantismo</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Povos originários nativos das Américas</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Os Maias</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Os Astecas</label></li>
-    </ul>
-  </div>
+      checkboxes.forEach((checkbox) => {
+        const id = checkbox.getAttribute("data-id");
 
-  <div class="semana">
-    <h2>Semana 9 — 18 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">HIST. BRASIL — Governo Constitucional de Deodoro</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Governo de Prudente de Morais</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Racionalismo, Empirismo e Descartes</label></li>
-      <li><label><input type="checkbox">SOCIOLOGIA — Pensamento Social Brasileiro</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Neoclassicismo</label></li>
-      <li><label><input type="checkbox">INGLÊS — Present Perfect Continuous</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — O Sujeito</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Predicação Verbal e Predicado</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Relevo Brasileiro II</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Relevo Brasileiro III</label></li>
-      <li><label><input type="checkbox">LITERATURA — Romantismo - Terceira Geração</label></li>
-      <li><label><input type="checkbox">LITERATURA — Romantismo - Narrativa</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Os Incas</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Crises dos Séculos XIV e XV</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Formação das Monarquias Nacionais</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Governo Campos Sales</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Governo Rodrigues Alves</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Bacon, Hume e Locke</label></li>
-    </ul>
-  </div>
+        if (salvo[id] === true) {
+          checkbox.checked = true;
+        }
 
-  <div class="semana">
-    <h2>Semana 10 — 18 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">SOCIOLOGIA — Cidadania e os Direitos no Brasil</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Missão Artística Francesa</label></li>
-      <li><label><input type="checkbox">INGLÊS — Past Simple</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Regência Verbal e Nominal</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Complementos Verbais</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Relevo do Litoral Brasileiro</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Relevo da Ásia</label></li>
-      <li><label><input type="checkbox">LITERATURA — Romantismo - José de Alencar</label></li>
-      <li><label><input type="checkbox">LITERATURA — José de Alencar - Principais Obras</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Renascimento Artístico I</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Renascimento Artístico II</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Renascimento: Fases, Difusão e Crise</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Governo Afonso Pena</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Governo Hermes da Fonseca</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Kant</label></li>
-      <li><label><input type="checkbox">SOCIOLOGIA — Desigualdades no Brasil</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Romantismo</label></li>
-      <li><label><input type="checkbox">INGLÊS — Past Continuous</label></li>
-    </ul>
-  </div>
+        aplicarEstiloConclusao(checkbox);
 
-  <div class="semana">
-    <h2>Semana 11 — 18 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Complementos Verbais</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Adjunto Adnominal, Compl. Nominal e Aposto</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Produção Mineral no Brasil</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Formação dos Solos</label></li>
-      <li><label><input type="checkbox">LITERATURA — Memórias de um Sargento de Milícias</label></li>
-      <li><label><input type="checkbox">LITERATURA — Teatro</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Introdução à Geografia</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Nação e Território</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Organização do Estado Brasileiro</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Fronteira, Limites e Divisas</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Reforma Luterana</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Reforma Calvinista</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Contrareforma</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Governo Venceslau Brás</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — O Nacionalista Econômico - Estado Novo</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Hegel</label></li>
-      <li><label><input type="checkbox">SOCIOLOGIA — Violência e Contemporaneidade</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Arte Brasileira do século XIX</label></li>
-    </ul>
-  </div>
+        checkbox.addEventListener("change", function () {
+          const progressoAtual = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+          progressoAtual[id] = checkbox.checked;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(progressoAtual));
+          aplicarEstiloConclusao(checkbox);
+          atualizarResumo();
+        });
+      });
 
-  <div class="semana">
-    <h2>Semana 12 — 18 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">INGLÊS — Past Perfect</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Adjunto Adnominal</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Aposto e Vocativo</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Processos erosivos intensos</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Voçoroca</label></li>
-      <li><label><input type="checkbox">LITERATURA — Realismo - Introdução</label></li>
-      <li><label><input type="checkbox">LITERATURA — Realismo - Portugal</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Formação do Território Brasileiro</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Teorias Demográficas e Análise Populacional</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Conceitos Demográficos I</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Absolutismo - Contextos Gerais</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Absolutismo Inglês</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Absolutismo Francês</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Era Vargas e o Brasil na Segunda Guerra</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Gaspar Dutra</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Nietzsche</label></li>
-      <li><label><input type="checkbox">SOCIOLOGIA — Movimentos Sociais</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Realismo Brasileiro</label></li>
-    </ul>
-  </div>
+      atualizarResumo();
+    }
 
-  <div class="semana">
-    <h2>Semana 13 — 18 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">INGLÊS — Past Perfect Continuous</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Aposto e Vocativo</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Crase</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — O sistema Terra-Sol</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Os componentes do clima</label></li>
-      <li><label><input type="checkbox">LITERATURA — Realismo - Brasil</label></li>
-      <li><label><input type="checkbox">LITERATURA — Machado de Assis</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Conceitos Demográficos II</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — População Brasileira</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Transição Demográfica Brasileira</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Expansão Marítima - Contexto e Fatores</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Expansão Marítima - Espanha</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Expansão Marítima - Portugal</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — O Segundo Governo Vargas</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Café Filho e JK</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — A História da Ciência</label></li>
-      <li><label><input type="checkbox">SOCIOLOGIA — Infância, Adolescência e Juventude</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Impressionismo</label></li>
-    </ul>
-  </div>
+    function limparProgresso() {
+      const confirmar = confirm("Tem certeza que deseja apagar todo o progresso salvo?");
+      if (!confirmar) return;
 
-  <div class="semana">
-    <h2>Semana 14 — 18 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">INGLÊS — Simple Future</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Vozes Verbais e Agentes da Passiva</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Vozes Verbais</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — O Balanço Térmico</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Tipos de Chuvas</label></li>
-      <li><label><input type="checkbox">LITERATURA — Romances</label></li>
-      <li><label><input type="checkbox">LITERATURA — Contos</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Migração Interna Brasileira</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Análise da Pirâmide Etária</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — População Mundial - Migração Externa</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Agricultura Brasileira</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Expansão Marítima - Consequências</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Mercantilismo</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Antigo Sistema Colonial</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — O Governo J.K - Especial</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — O Legado de JK</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Escola de Frankfurt</label></li>
-      <li><label><input type="checkbox">SOCIOLOGIA — Migrações no Mundo Moderno</label></li>
-    </ul>
-  </div>
+      localStorage.removeItem(STORAGE_KEY);
+      const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+        aplicarEstiloConclusao(checkbox);
+      });
+      atualizarResumo();
+    }
 
-  <div class="semana">
-    <h2>Semana 15 — 18 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">HIST. ARTE — Realismo</label></li>
-      <li><label><input type="checkbox">INGLÊS — To be going to</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Adjunto Adverbial</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Adjunto Adverbial</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — O papel da climatologia na dinâmica terrestre</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Os oceanos e o clima</label></li>
-      <li><label><input type="checkbox">LITERATURA — Naturalismo</label></li>
-      <li><label><input type="checkbox">LITERATURA — Parnasianismo</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Agronegócio e Produção Agrícola Brasileira</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Trabalho no Campo</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Reforma Agrária no Brasil</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — A Questão Agrária no Brasil</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Redemocratização</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Colonização Espanhola</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Expansão e Colonização Inglesa</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Expansão e Colonização Francesa</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Foucault</label></li>
-      <li><label><input type="checkbox">SOCIOLOGIA — Ambiente como Questão Global</label></li>
-    </ul>
-  </div>
+    function expandirTodas() {
+      document.querySelectorAll("details.semana").forEach((item) => {
+        item.open = true;
+      });
+    }
 
-  <div class="semana">
-    <h2>Semana 16 — 17 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">HIST. ARTE — Cubismo</label></li>
-      <li><label><input type="checkbox">INGLÊS — Future Continuous</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Colocação dos Termos na Oração</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Colocação dos termos</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Massas de ar I</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Massas de ar II</label></li>
-      <li><label><input type="checkbox">LITERATURA — Olavo Bilac</label></li>
-      <li><label><input type="checkbox">LITERATURA — Simbolismo</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — O Desenvolvimento da Agricultura</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Agricultura nos Países Subdesenvolvidos</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — As Paisagens Naturais e Sistemas Agrícolas</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Agricultura nos Estados Unidos</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Expansão e Colonização Holandesa</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Revoluções Puritana e Gloriosa</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — A Construção de Brasília</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Jânio Quadros</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Simone Beauvoir e Sartre</label></li>
-    </ul>
-  </div>
+    function fecharTodas() {
+      document.querySelectorAll("details.semana").forEach((item) => {
+        item.open = false;
+      });
+    }
 
-  <div class="semana">
-    <h2>Semana 17 — 17 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">HIST. ARTE — Hiperrealismo</label></li>
-      <li><label><input type="checkbox">INGLÊS — Future Perfect</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Concordância Nominal</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Concordância nominal</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Tipos de Clima</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Circulação da Atmosfera</label></li>
-      <li><label><input type="checkbox">LITERATURA — Simbolismo no Brasil</label></li>
-      <li><label><input type="checkbox">LITERATURA — Pré-Modernismo</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Introdução à Urbanização</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Rede, Hierarquia e Função</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Regiões Metropolitanas</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Processo de Urbanização Brasileira</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Iluminismo</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Independência dos Estados Unidos</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — João Goulart</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Humberto Castelo Branco</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Habermas e Hanna Arendt</label></li>
-    </ul>
-  </div>
-
-  <div class="semana">
-    <h2>Semana 18 — 17 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">HIST. ARTE — Surrealismo</label></li>
-      <li><label><input type="checkbox">INGLÊS — Future Perfect Continuous</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Concordância Verbal</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Concordância Verbal</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Furacões e Tornados</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — El Niño</label></li>
-      <li><label><input type="checkbox">LITERATURA — Lima Barreto</label></li>
-      <li><label><input type="checkbox">LITERATURA — Euclides da Cunha</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Gentrificação e Especulação Imobiliária</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Urbanização e Cultura de Massas</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Taylorismo, Fordismo e Toyotismo</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Tipos de Indústria</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Revolução Francesa</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Revolução Francesa - Fase Popular</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Artur Costa e Silva</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Emílio Garrastazu Médici</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Bioética e Hans Jonas</label></li>
-    </ul>
-  </div>
-
-  <div class="semana">
-    <h2>Semana 19 — 17 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">HIST. ARTE — Expressionismo</label></li>
-      <li><label><input type="checkbox">INGLÊS — Conditionals</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Oração Subordinada Substantiva</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Orações Sub. Substantivas</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Geossistema Climático da Amazônia</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Clima na Amazônia</label></li>
-      <li><label><input type="checkbox">LITERATURA — Augusto dos Anjos</label></li>
-      <li><label><input type="checkbox">LITERATURA — Vanguardas Europeias</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Indústria Brasileira</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — A Indústria no Mundo</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Indústria nos EUA, Europa e Japão</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Indústria na América Latina</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Revolução Industrial</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Consequências da Revolução Industrial</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Ernesto Geisel</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Figueiredo</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Política e Poder</label></li>
-    </ul>
-  </div>
-
-  <div class="semana">
-    <h2>Semana 20 — 17 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">HIST. ARTE — Futurismo</label></li>
-      <li><label><input type="checkbox">INGLÊS — Modal Verbs</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Orações Subordinadas Adverbiais</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Orações Sub. Adverbiais</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Clima da Ásia</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Clima da Europa</label></li>
-      <li><label><input type="checkbox">LITERATURA — Modernismo em Portugal</label></li>
-      <li><label><input type="checkbox">LITERATURA — Fernando Pessoa</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Fases do Capitalismo</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Expansão do Capitalismo</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Globalização</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Era Napoleônica</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Expansão Territorial dos EUA</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Redemocratização e Sarney</label></li>
-      <li><label><input type="checkbox">HIST. BRASIL — Governo Collor</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Racismo Estrutural</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Dadaísmo</label></li>
-    </ul>
-  </div>
-
-  <div class="semana">
-    <h2>Semana 21 — 17 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">INGLÊS — Modal Verbs II</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Orações Subordinadas Adjetivas</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Orações Sub. Adjetivas</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Poluição Atmosférica e Inversão Térmica</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Problemas ambientais urbanos</label></li>
-      <li><label><input type="checkbox">LITERATURA — Semana de Arte Moderna</label></li>
-      <li><label><input type="checkbox">LITERATURA — Oswald de Andrade</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Economia na Globalização</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Nova Divisão Internacional do Trabalho</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Blocos Econômicos</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Guerra de Secessão</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Revoluções de 1830 e 1848</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Modernidade Líquida</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Arte Cinética Conceitual</label></li>
-      <li><label><input type="checkbox">INGLÊS — Phrasal Verbs e Expressões Idiomáticas</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Orações Coordenadas</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Orações coordenadas</label></li>
-    </ul>
-  </div>
-
-  <div class="semana">
-    <h2>Semana 22 — 17 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">GEO. FÍSICA — Eventos Climáticos Extremos</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — A Questão Climática</label></li>
-      <li><label><input type="checkbox">LITERATURA — Mario de Andrade</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Mercosul</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Recursos Energéticos</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Combustíveis Fósseis</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Unificação da Itália</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Unificação da Alemanha</label></li>
-      <li><label><input type="checkbox">FILOSOFIA — Ética e Liberdade</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Minimalismo Body Art</label></li>
-      <li><label><input type="checkbox">INGLÊS — False Friends e Collocations</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Pontuação</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Pontuação</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Aquecimento Global</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Mudanças Climáticas</label></li>
-      <li><label><input type="checkbox">LITERATURA — Manoel Bandeira</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Transportes no Brasil</label></li>
-    </ul>
-  </div>
-
-  <div class="semana">
-    <h2>Semana 23 — 17 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">GEO. HUMANA — Indicadores Socioeconômicos</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — IDH Municipal</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Neocolonialismo - Origem</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Neocolonialismo - Efeitos</label></li>
-      <li><label><input type="checkbox">HIST. ARTE — Expressionismo Abstrato</label></li>
-      <li><label><input type="checkbox">INGLÊS — English Questions</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Semântica</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Semântica</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Águas do Planeta</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Conceitos Hidrográficos</label></li>
-      <li><label><input type="checkbox">LITERATURA — Geração de 30</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Instituições Internacionais</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Guerra Fria</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Rivalidade Global da Guerra Fria</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — O fim da Guerra Fria e as Novas Fronteiras</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Rumo à Ordem Pluripolar</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Imperialismo Americano</label></li>
-    </ul>
-  </div>
-
-  <div class="semana">
-    <h2>Semana 24 — 17 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">HIST. GERAL — Primeira Guerra Mundial I</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Figuras de Palavra e Figuras de Som</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Figuras de Construção</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Morfologia e Padrões de Drenagem</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Bacia Hidrográfica</label></li>
-      <li><label><input type="checkbox">LITERATURA — Romance de 30</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Nova Ordem Mundial</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Geopolítica dos EUA</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Política Externa dos EUA</label></li>
-      <li><label><input type="checkbox">GEO. HUMANA — Geopolítica Mundial do Petróleo</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Primeira Guerra Mundial II</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Revolução Russa - Origens</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Figuras de Pensamento</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Figuras de Linguagem 1</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Hidrografia Brasileira e Correntes Marítimas</label></li>
-      <li><label><input type="checkbox">LITERATURA — Graciliano Ramos</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — China</label></li>
-    </ul>
-  </div>
-
-  <div class="semana">
-    <h2>Semana 25 — 17 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">GEO. REGIONAL — Ásia Meridional</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Índia</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Rússia I</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Rússia II</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Tigres Asiáticos</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Revolução Russa - Fase Socialista</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Revolução Russa - Fase Stalinista</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Figuras de Linguagem 2</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Figuras de Linguagem 3</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Sistemas Aquíferos</label></li>
-      <li><label><input type="checkbox">LITERATURA — Carlos Drummond de Andrade</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Japão I</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Japão II</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — América do Norte - Física</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — América do Norte - Econômica</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — América Central</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Europa - Formação da UE</label></li>
-    </ul>
-  </div>
-
-  <div class="semana">
-    <h2>Semana 26 — 17 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">GEO. REGIONAL — Europa - Aspectos Naturais</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Europa - Aspectos Econômicos</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Nazismo e Fascismo</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Franquismo</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Texto, Contexto e Intertexto</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Texto, Contexto e Intertexto</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Tipos de Biomas</label></li>
-      <li><label><input type="checkbox">LITERATURA — Carlos Drummond de Andrade</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — África Humana</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — África - Geografia Física</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Oriente Médio e Jerusalém</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Israel x Palestina</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Revolução Iraniana</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Segunda Guerra Mundial I</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Segunda Guerra Mundial II</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Tipos Textuais</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Tipos Textuais</label></li>
-    </ul>
-  </div>
-
-  <div class="semana">
-    <h2>Semana 27 — 17 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">GEO. FÍSICA — Amazônia</label></li>
-      <li><label><input type="checkbox">LITERATURA — Geração de 45</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Oceania - Aspectos Gerais e Físicos</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Oceania - Aspectos Humanos</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Nordeste - Aspectos Naturais</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Nordeste - Aspectos Humanos</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Nordeste - Aspectos Econômicos</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Descolonização da Ásia</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — As Nações Unidas</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Gêneros Textuais - Sist. Informativo e Jornalístico</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Gêneros Textuais - Sist. Publicitário</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Biomas Brasileiros</label></li>
-      <li><label><input type="checkbox">LITERATURA — João Cabral de Melo Neto</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Norte - Aspectos Naturais</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Norte - Aspectos Humanos</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Norte - Aspectos Econômicos</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Sudeste - Aspectos Naturais</label></li>
-    </ul>
-  </div>
-
-  <div class="semana">
-    <h2>Semana 28 — 17 aulas</h2>
-    <ul class="aulas">
-      <li><label><input type="checkbox">GEO. REGIONAL — Sudeste - Aspectos Humanos</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Sudeste - Aspectos Econômicos</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Revolução Chinesa</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Mao-Tsetung</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Articulação para Criação do Humor e Ironia</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Pantanal</label></li>
-      <li><label><input type="checkbox">LITERATURA — João Cabral de Melo Neto (Obras / Análise)</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Centro-Oeste - Aspectos Naturais</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Centro-Oeste - Aspectos Humanos</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Centro-Oeste - Aspectos Econômicos</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Sul - Aspectos Naturais</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Sul - Aspectos Humanos</label></li>
-      <li><label><input type="checkbox">GEO. REGIONAL — Sul - Aspectos Econômicos</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Revolução Cubana</label></li>
-      <li><label><input type="checkbox">HIST. GERAL — Guerra Fria</label></li>
-      <li><label><input type="checkbox">GRAMÁTICA — Exercícios - Criação de Humor</label></li>
-      <li><label><input type="checkbox">GEO. FÍSICA — Domínios Morfoclimáticos</label></li>
-    </ul>
-  </div>
-
+    carregarProgresso();
+  </script>
 </body>
 </html>
